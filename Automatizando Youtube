@@ -1,0 +1,15 @@
+print("olá")#System.out.println("Hello World");
+import pyautogui as casatumatica
+
+casatumatica.moveTo(670,1050)
+casatumatica.click(670,1050)
+casatumatica.write("Edge")
+casatumatica.press("enter")
+casatumatica.sleep(1.0)
+casatumatica.write("Youtube")
+casatumatica.press("enter")
+casatumatica.sleep(1.0)
+casatumatica.write("Amor Hospitalar")
+casatumatica.press("enter")
+casatumatica.sleep(1.0)
+casatumatica.click(600,500)
