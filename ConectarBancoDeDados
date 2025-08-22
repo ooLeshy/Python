@@ -1,0 +1,46 @@
+import mysql.connector
+from mysql.connector import Error
+ 
+DB_CONFIG = {
+    "host": "localhost",
+    "user": "root",     # padrão do XAMPP
+    "password": "",     # altere se tiver senha
+    "database": "teste" # seu banco já existente
+}
+ 
+def main():
+    try:
+        cnx = mysql.connector.connect(**DB_CONFIG)
+        cur = cnx.cursor()
+ 
+        # --- Inserção de Pessoa ---
+        nome_pessoa = input("Digite o nome da pessoa: ").strip()
+        if nome_pessoa:
+            cur.execute("INSERT INTO pessoas (nome) VALUES (%s)", (nome_pessoa,))
+            print(f"Pessoa salva! ID: {cur.lastrowid}")
+ 
+        # --- Inserção de Produto ---
+        nome_produto = input("Digite o nome do produto: ").strip()
+        preco = input("Digite o preço do produto: ").strip()
+ 
+        if nome_produto and preco:
+            try:
+                preco = float(preco)
+                cur.execute("INSERT INTO produtos (nome, preco) VALUES (%s, %s)", (nome_produto, preco))
+                print(f"Produto salvo! ID: {cur.lastrowid}")
+            except ValueError:
+                print("Preço inválido. Produto não inserido.")
+ 
+        cnx.commit()
+ 
+    except Error as e:
+        print("Erro:", e)
+    finally:
+        try:
+            cur.close()
+            cnx.close()
+        except:
+            pass
+ 
+if __name__ == "__main__":
+    main()
