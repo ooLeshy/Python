@@ -24,26 +24,32 @@ class SistemaLojaGames:
             messagebox.showerror("Erro", "Verifique o XAMPP!")
 
     def criar_menu_principal(self):
-        tk.Label(self.root, text="LOJA DE GAMES", font=('Arial', 16, 'bold')).pack(pady=10)
+        tk.Label(self.root, text="MARIO GAMES", font=('Arial', 50, 'bold')).pack(pady=10)
+
+        frame_botoes = tk.Frame(self.root)
+        frame_botoes.pack(pady=200)
         
         botoes = [
-            ("1. Cadastrar Jogo", self.janela1_cadastrar_jogo),
-            ("2. Listar Jogos", self.janela2_listar_jogos),
-            ("3. Editar Jogo", self.janela3_editar_jogo),
-            ("4. Excluir Jogo", self.janela4_excluir_jogo),
-            ("5. Cadastrar Cliente", self.janela5_cadastrar_cliente),
-            ("6. Listar Clientes", self.janela6_listar_clientes),
-            ("7. Nova Venda", self.janela7_nova_venda),
-            ("8. Histórico Vendas", self.janela8_historico_vendas),
-            ("9. Estoque", self.janela9_estoque),
-            ("10. Buscar Jogo", self.janela10_buscar_jogo),
-            ("11. Relatório Vendas", self.janela11_relatorio_vendas),
-            ("12. Sair", self.root.quit)
+            ("📥 Cadastrar Jogo", self.janela1_cadastrar_jogo),
+            ("📋 Listar Jogos", self.janela2_listar_jogos),
+            ("✏️ Editar Jogo", self.janela3_editar_jogo),
+            ("🗑️ Excluir Jogo", self.janela4_excluir_jogo),
+            ("👥 Cadastrar Cliente", self.janela5_cadastrar_cliente),
+            ("📊 Listar Clientes", self.janela6_listar_clientes),
+            ("💰 Nova Venda", self.janela7_nova_venda),
+            ("📈 Histórico Vendas", self.janela8_historico_vendas),
+            ("📦 Estoque", self.janela9_estoque),
+            ("🔍 Buscar Jogo", self.janela10_buscar_jogo),
+            ("📋 Relatório Vendas", self.janela11_relatorio_vendas),
+            ("🚪 Sair", self.root.quit)
         ]
         
-        for texto, comando in botoes:
-            tk.Button(self.root, text=texto, command=comando, width=20).pack(pady=2)
-
+        for i, (texto, comando) in enumerate(botoes):
+            btn = tk.Button(frame_botoes, text=texto, command=comando,
+                          width=20, height=2, bg='#3498db', fg='white',
+                          font=('Arial', 10, 'bold'))
+            btn.grid(row=i//2, column=i%2, padx=5, pady=3)
+            
     # JANELA 1 - Cadastrar Jogo
     def janela1_cadastrar_jogo(self):
         janela = tk.Toplevel()
@@ -84,7 +90,7 @@ class SistemaLojaGames:
     def janela2_listar_jogos(self):
         janela = tk.Toplevel()
         janela.title("Lista de Jogos")
-        janela.geometry("500x300")
+        janela.geometry("1100x300")
         
         tree = ttk.Treeview(janela, columns=('ID', 'Nome', 'Preço', 'Categoria', 'Estoque'), show='headings')
         for col in tree['columns']:
@@ -188,7 +194,7 @@ class SistemaLojaGames:
     def janela6_listar_clientes(self):
         janela = tk.Toplevel()
         janela.title("Lista de Clientes")
-        janela.geometry("400x300")
+        janela.geometry("800x300")
         
         tree = ttk.Treeview(janela, columns=('ID', 'Nome', 'Email'), show='headings')
         for col in tree['columns']:
@@ -255,7 +261,7 @@ class SistemaLojaGames:
     def janela8_historico_vendas(self):
         janela = tk.Toplevel()
         janela.title("Histórico de Vendas")
-        janela.geometry("600x400")
+        janela.geometry("800x300")
         
         tree = ttk.Treeview(janela, columns=('ID', 'Cliente ID', 'Data', 'Total'), show='headings')
         for col in tree['columns']:
@@ -271,7 +277,7 @@ class SistemaLojaGames:
     def janela9_estoque(self):
         janela = tk.Toplevel()
         janela.title("Controle de Estoque")
-        janela.geometry("400x300")
+        janela.geometry("800x300")
         
         tree = ttk.Treeview(janela, columns=('ID', 'Jogo', 'Estoque'), show='headings')
         tree.heading('ID', text='ID')
@@ -288,7 +294,7 @@ class SistemaLojaGames:
     def janela10_buscar_jogo(self):
         janela = tk.Toplevel()
         janela.title("Buscar Jogo")
-        janela.geometry("400x300")
+        janela.geometry("900x300")
         
         tk.Label(janela, text="Nome do jogo:").pack()
         busca_entry = tk.Entry(janela)
